@@ -25,7 +25,7 @@ jobs:
       - run: npm run build --prefix lib
       - run: npm ci --prefix demo
       - run: cd lib && npm link && cd ..
-      - run: cd demo && npm link shadows-js && cd ..
+      - run: cd demo && npm link gcode-documentation && cd ..
       - run: npm run build --if-present --prefix demo
       - run: npm test --prefix demo
   demo-deploy:
@@ -43,7 +43,7 @@ jobs:
       - run: npm run build --prefix lib
       - run: npm ci --prefix demo
       - run: cd lib && npm link && cd ..
-      - run: cd demo && npm link shadows-js && cd ..
+      - run: cd demo && npm link gcode-documentation && cd ..
       - run: npm run build --prefix demo
 
       - name: Deploy
