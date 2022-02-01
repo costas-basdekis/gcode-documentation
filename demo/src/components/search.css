@@ -1,0 +1,116 @@
+pre {
+    margin: 0;
+}
+
+.terminal-marlin-gcode-documentation {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.terminal-documentation-results {
+    overflow-y: auto;
+    resize: vertical;
+    height: 353px;
+    padding-left: 20px;
+}
+
+.terminal-documentation-command {
+    color: #ACF;
+    background-color: #226;
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-family: "Oxygen Mono", monospace;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.terminal-documentation-command:hover {
+    text-decoration: underline;
+}
+
+.terminal-documentation-parameter-tag {
+    color: #ADF;
+    background: #246;
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-family: "Oxygen Mono", monospace;
+    display: inline-block;
+}
+
+.terminal-documentation-parameter-value {
+    color: #ADF;
+    background: #264;
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-family: "Oxygen Mono", monospace;
+    display: inline-block;
+}
+
+.terminal-documentation-result-parameter.missing .terminal-documentation-parameter-value {
+    background: #666;
+}
+
+.terminal-documentation-result-parameter.required.missing .terminal-documentation-parameter-value {
+    background: #b42;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.terminal-documentation-source:after {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-size: 100%;
+    vertical-align: middle;
+    margin: 5px;
+}
+
+.terminal-documentation-source.terminal-documentation-source-marlin:after {
+    background-image: url(icons/marlin.ico);
+}
+
+.terminal-documentation-source.terminal-documentation-source-reprap:after {
+    background-image: url(icons/reprap.ico);
+}
+
+.terminal-documentation-source.terminal-documentation-source-klipper:after {
+    background-image: url(icons/klipper.ico);
+}
+
+.themeify .alert.alert-info .close {
+    color: #000000;
+}
+
+.terminal-documentation-favourite {
+    color: gold;
+    cursor: pointer;
+}
+
+#terminal-output.explain-sent-commands span.sent {
+    margin-right: 1.5em;
+    cursor: pointer;
+}
+
+#terminal-output.explain-sent-commands span.sent:hover {
+    text-decoration: underline;
+}
+
+#terminal-output.explain-sent-commands span.sent::after {
+    display: inline-block;
+    content: "\f05a";
+    width: 1em;
+    height: 1em;
+    position: absolute;
+    right: -1.5em;
+    top: 0;
+    margin-top: 0.3em;
+    color: white;
+    font: normal normal normal 14px/1 FontAwesome;
+    background-color: green;
+    border-radius: 6px;
+    border: 1px solid green;
+    padding: 1px;
+}
