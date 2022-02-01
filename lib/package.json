@@ -1,0 +1,42 @@
+{
+  "name": "gcode-documentation",
+  "version": "0.0.1",
+  "description": "Parse user GCode, and annotate it with documentation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "watch": "rm -rf dist && tsc --watch",
+    "test": "TS_NODE_PROJECT=\"tsconfig.testing.json\" mocha tests --require ts-node/register --reporter min src tests/**/*.spec.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/costas-basdekis/gcode-documentation.git"
+  },
+  "author": "Costas Basdekis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/costas-basdekis/gcode-documentation/issues"
+  },
+  "homepage": "https://costas-basdekis.github.io/gcode-documentation/",
+  "keywords": [
+    "gcode",
+    "3d-printing",
+    "marlin",
+    "reprap",
+    "klipper3d"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.1.0",
+    "chai": "^4.3.6",
+    "mocha": "^9.2.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  }
+}

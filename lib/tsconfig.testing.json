@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "target": "es6",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "declaration": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "rootDir": "."
+  },
+  "include": [
+    "tests/**/*.spec.ts"
+  ],
+  "exclude": [
+  ]
+}
