@@ -3,7 +3,7 @@ name: Demo app
 on:
   workflow_run:
     workflows: ["Package"]
-    branches: [master]
+    branches: [main]
     types:
       - completed
 jobs:

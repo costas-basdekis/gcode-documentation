@@ -2,7 +2,7 @@
 
 set -uo pipefail
 
-DOCS_PREFIX="https://raw.githubusercontent.com/costas-basdekis/gcode-documentation/master/"
+DOCS_PREFIX="https://raw.githubusercontent.com/costas-basdekis/gcode-documentation/main/"
 
 cd lib
 npm run build
