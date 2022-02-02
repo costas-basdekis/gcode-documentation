@@ -13,6 +13,7 @@ export type GcodeParseResult = {
   cmds?: string[],
   ln?: number,
   cs?: number,
+  actualCs?: number;
   err?: boolean,
 };
 
@@ -136,8 +137,10 @@ export class GcodeParser {
 
     // Checksum
     (typeof (cs) !== 'undefined') && (result.cs = cs);
-    if (result.cs && (this.computeChecksum(line) !== result.cs)) {
+    const actualCs = this.computeChecksum(line);
+    if (result.cs && (actualCs !== result.cs)) {
       result.err = true; // checksum failed
+      result.actualCs = actualCs;
     }
 
     return result;

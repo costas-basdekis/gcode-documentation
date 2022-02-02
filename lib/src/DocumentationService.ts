@@ -44,7 +44,7 @@ export class DocumentationService {
     this.klipperGcodeParser = new KlipperExtendedGcodeParser();
   }
 
-  findDocs(searchString: string): [string, GcodeInfo][] {
+  findDocsIds(searchString: string): string[] {
     const parts = searchString.toLowerCase().trim().split(/\s+/g);
     const idLists: string[][] = Object.entries(this.allGcodes)
       .map(([command, doc]): string[] | null => {
@@ -73,6 +73,10 @@ export class DocumentationService {
       .filter(ids => ids) as string[][];
     return idLists
       .flat()
+  }
+
+  findDocs(searchString: string): [string, GcodeInfo][] {
+    return this.findDocsIds(searchString)
       .map(id => this.allGcodesById[id]);
   }
 
