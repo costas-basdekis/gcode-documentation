@@ -5,6 +5,9 @@ import {DocumentationService, SearchResult, Source} from "gcode-documentation";
 import {SearchResults} from "./SearchResults";
 
 type AppState = {
+  documentationService: DocumentationService,
+  hasFullDocumentation: boolean,
+  documentationLength: number,
   searchTerm: string,
   searchResult: SearchResult,
   collapsedCommands: string[],
@@ -12,20 +15,46 @@ type AppState = {
 };
 
 export class App extends Component<{}, AppState> {
-  documentationService = new DocumentationService(demoGcodeInfoSet);
-  state: AppState = {
-    searchTerm: "G1 X110",
-    searchResult: this.documentationService.getSearchResult("G1 X110"),
-    collapsedCommands: [],
-    includeSources: {
-      "Marlin": true,
-      "RepRap": true,
-      "Klipper": true,
-    },
-  };
+  getInitialState(): AppState {
+    const documentationService = new DocumentationService(demoGcodeInfoSet);
+    const searchTerm = "G1 X110";
+
+    return {
+      documentationService,
+      hasFullDocumentation: false,
+      documentationLength: Object.keys(documentationService.allGcodes).length,
+      searchTerm: searchTerm,
+      searchResult: documentationService.getSearchResult(searchTerm),
+      collapsedCommands: [],
+      includeSources: {
+        "Marlin": true,
+        "RepRap": true,
+        "Klipper": true,
+      },
+    };
+  }
+
+  state: AppState = this.getInitialState();
+
+  componentDidMount() {
+    // noinspection JSIgnoredPromiseFromCall
+    this.loadAllCodes();
+  }
+
+  async loadAllCodes() {
+    const response = await fetch(`${process.env.PUBLIC_URL}/allCodes.json`);
+    const allCodes = await response.json();
+    const documentationService = new DocumentationService(allCodes);
+    this.setState({
+      documentationService,
+      hasFullDocumentation: true,
+      documentationLength: Object.keys(documentationService.allGcodes).length,
+    });
+    this.updateSearch();
+  }
 
   render() {
-    const {searchTerm, searchResult, collapsedCommands, includeSources} = this.state;
+    const {documentationLength, hasFullDocumentation, searchTerm, searchResult, collapsedCommands, includeSources} = this.state;
 
     return (
       <div>
@@ -43,7 +72,7 @@ export class App extends Component<{}, AppState> {
           and needs the parsed documentation data to function.
         </p>
         <div>
-          Search:{" "}
+          Search ({documentationLength} commands):{" "}
           <input type={"text"} value={searchTerm} onChange={this.onSearchChange} />
           {" "}
           <label>
@@ -60,7 +89,7 @@ export class App extends Component<{}, AppState> {
           </label>
         </div>
         <div>
-          Results:
+          Results{!hasFullDocumentation ? " (only a small subset)" : null}:
           <SearchResults
             searchResult={searchResult}
             collapsedCommands={collapsedCommands}
@@ -77,8 +106,8 @@ export class App extends Component<{}, AppState> {
   };
 
   updateSearch() {
-    this.setState(({searchTerm, includeSources}) => ({
-      searchResult: this.documentationService.getSearchResult(searchTerm, {include: includeSources}),
+    this.setState(({documentationService, searchTerm, includeSources}) => ({
+      searchResult: documentationService.getSearchResult(searchTerm, {include: includeSources}),
     }));
   }
 

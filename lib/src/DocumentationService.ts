@@ -29,7 +29,7 @@ export type SearchResult = {
 };
 
 export class DocumentationService {
-  private readonly allGcodes: GcodeInfoSet;
+  public readonly allGcodes: GcodeInfoSet;
   private readonly allGcodesById: { [p: string]: [string, GcodeInfo] };
   private readonly klipperGcodeParser: KlipperExtendedGcodeParser;
 
