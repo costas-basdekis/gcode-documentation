@@ -45,7 +45,10 @@ export class DocumentationService {
   }
 
   findDocsIds(searchString: string): string[] {
-    const parts = searchString.toLowerCase().trim().split(/\s+/g);
+    const parts = searchString.toLowerCase().trim().split(/\s+/g).filter(part => part);
+    if (!parts.length) {
+      return [];
+    }
     const idLists: string[][] = Object.entries(this.allGcodes)
       .map(([command, doc]): string[] | null => {
         const commandLowerCase = command.toLowerCase();
@@ -71,8 +74,7 @@ export class DocumentationService {
         return ids;
       })
       .filter(ids => ids) as string[][];
-    return idLists
-      .flat()
+    return Array.from(new Set(idLists.flat()));
   }
 
   findDocs(searchString: string): [string, GcodeInfo][] {

@@ -124,7 +124,10 @@ export class GcodeParser {
         result.words = [command, stringMessage];
       } else {
         const commandLetter = command[0];
-        const commandNumber: string = command.slice(1);
+        let commandNumber: string | number = command.slice(1);
+        if (!Number.isNaN(Number(commandNumber))) {
+          commandNumber = Number(commandNumber);
+        }
         const parameterName: string = (this.constructor as typeof GcodeParser)
           .STRING_MESSAGE_PARAMETER_NAME[commandNumber];
         result.words = [
