@@ -10,7 +10,8 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "watch": "rm -rf dist && tsc --watch",
-    "test": "TS_NODE_PROJECT=\"tsconfig.testing.json\" mocha tests --require ts-node/register --reporter min src tests/**/*.spec.ts"
+    "test": "TS_NODE_PROJECT=\"tsconfig.testing.json\" mocha tests --require ts-node/register --reporter min src tests/**/*.spec.ts",
+    "test-watch": "TS_NODE_PROJECT=\"tsconfig.testing.json\" mocha tests --watch --watch-files src --watch-files tests --require ts-node/register --reporter min src tests/**/*.spec.ts"
   },
   "repository": {
     "type": "git",
