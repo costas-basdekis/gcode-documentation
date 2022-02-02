@@ -1,15 +1,18 @@
 {
   "files": {
-    "main.css": "/gcode-documentation/static/css/main.073c9b0a.css",
-    "main.js": "/gcode-documentation/static/js/main.81e54db2.js",
+    "main.css": "/gcode-documentation/static/css/main.8c01aedf.css",
+    "main.js": "/gcode-documentation/static/js/main.0b4ac4a6.js",
     "static/js/787.c843c47a.chunk.js": "/gcode-documentation/static/js/787.c843c47a.chunk.js",
+    "static/media/klipper.ico": "/gcode-documentation/static/media/klipper.94285275c55bd5400687.ico",
+    "static/media/marlin.ico": "/gcode-documentation/static/media/marlin.7b52b3633b682a37706f.ico",
+    "static/media/reprap.ico": "/gcode-documentation/static/media/reprap.c6fa55411f90b9846821.ico",
     "index.html": "/gcode-documentation/index.html",
-    "main.073c9b0a.css.map": "/gcode-documentation/static/css/main.073c9b0a.css.map",
-    "main.81e54db2.js.map": "/gcode-documentation/static/js/main.81e54db2.js.map",
+    "main.8c01aedf.css.map": "/gcode-documentation/static/css/main.8c01aedf.css.map",
+    "main.0b4ac4a6.js.map": "/gcode-documentation/static/js/main.0b4ac4a6.js.map",
     "787.c843c47a.chunk.js.map": "/gcode-documentation/static/js/787.c843c47a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.81e54db2.js"
+    "static/css/main.8c01aedf.css",
+    "static/js/main.0b4ac4a6.js"
   ]
 }
