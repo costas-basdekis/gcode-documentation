@@ -18,9 +18,9 @@ export type GcodeParseResult = {
 
 // Adapted from https://github.com/cncjs/gcode-parser/blob/master/src/index.js
 export class GcodeParser {
-  static re = /(%.*)|({.*)|((?:\$\$)|(?:\$[a-zA-Z0-9#]*))|([a-zA-Z][0-9\+\-\.]+)|(\*[0-9]+)/igm;
+  static re = /(%.*)|({.*)|(\$\$|\$[a-zA-Z0-9#]*)|([a-zA-Z][0-9+\-.]+)|(\*[0-9]+)/igm;
   // Some commands have a string message, which is not parsed as normally
-  static reStringMessage = /\s*([Nn]\s*[0-9\+\-\.]+)?\s*[Mm]\s*(16|23|28|30|33|117|118|928|81[0-9])([^0-9\+\-\.].*)/igm;
+  static reStringMessage = /\s*([Nn]\s*[0-9+\-.]+)?\s*[Mm]\s*(16|23|28|30|33|117|118|928|81[0-9])([^0-9+\-.].*)/igm;
   static STRING_MESSAGE_PARAMETER_NAME: { [code: string]: string } = {
     16: 'string',
     23: 'filename',
@@ -42,7 +42,7 @@ export class GcodeParser {
     819: 'command',
   }
 
-  parseLine(line: string, options: PartialGcodeParserOptions = {}) {
+  parseLine(line: string, options: PartialGcodeParserOptions = {}): GcodeParseResult {
     const fullOptions: GcodeParserOptions = {
       flatten: !!options.flatten,
       noParseLine: !!options.noParseLine,
@@ -164,7 +164,7 @@ export class GcodeParser {
   computeChecksum(s: string): number {
     s = s || '';
     if (s.lastIndexOf('*') >= 0) {
-      s = s.substr(0, s.lastIndexOf('*'));
+      s = s.slice(0, s.lastIndexOf('*'));
     }
 
     let cs = 0;
@@ -175,7 +175,7 @@ export class GcodeParser {
     return cs;
   }
 
-  static re1 = new RegExp(/\s*\([^\)]*\)/g); // Remove anything inside the parentheses
+  static re1 = new RegExp(/\s*\([^)]*\)/g); // Remove anything inside the parentheses
   static re2 = new RegExp(/\s*;.*/g); // Remove anything after a semi-colon to the end of the line, including preceding spaces
   static re3 = new RegExp(/\s+/g);
 
