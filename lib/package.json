@@ -1,6 +1,6 @@
 {
   "name": "gcode-documentation",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Parse user GCode, and annotate it with documentation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,8 +30,7 @@
     "reprap",
     "klipper3d"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.3.0",
     "@types/mocha": "^9.1.0",
