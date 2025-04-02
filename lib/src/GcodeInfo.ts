@@ -21,6 +21,10 @@ export type GcodeInfo = {
   url: string,
 };
 export type GcodeInfoGroup = GcodeInfo[];
+export interface GcodeMeta {
+  type: "meta",
+  date: string,
+}
 export type GcodeInfoSet = {
   [name: string]: GcodeInfoGroup,
 };

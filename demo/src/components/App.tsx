@@ -53,6 +53,33 @@ export class App extends Component<{}, AppState> {
     this.updateSearch();
   }
 
+  updatedDays() {
+    const allGcodesDate: Date | null = this.state.documentationService.allGcodesDate;
+    if (!allGcodesDate) {
+      return null;
+    }
+    const millisDifference =
+      new Date().setHours(0, 0, 0, 0)
+      - allGcodesDate.setHours(0, 0, 0, 0);
+    const daysDifference =
+      Math.round((millisDifference) / (1000 * 60 * 60 * 24));
+    let text;
+    if (daysDifference === 0) {
+      text = "today";
+    } else if (daysDifference === 1) {
+      text = "yesterday";
+    } else if (daysDifference < 7) {
+      text = "this week";
+    } else {
+      text = `${daysDifference} days ago`;
+    }
+    return <>,
+      updated <span title={allGcodesDate.toString()}>
+        {text}
+      </span>
+    </>;
+  }
+
   render() {
     const {documentationLength, hasFullDocumentation, searchTerm, searchResult, collapsedCommands, includeSources} = this.state;
 
@@ -72,7 +99,7 @@ export class App extends Component<{}, AppState> {
           and needs the parsed documentation data to function.
         </p>
         <div>
-          Search ({documentationLength} commands):{" "}
+          Search ({documentationLength} commands{this.updatedDays()}):{" "}
           <input type={"text"} value={searchTerm} onChange={this.onSearchChange} />
           {" "}
           <label>

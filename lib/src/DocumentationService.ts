@@ -1,6 +1,6 @@
 import {KlipperExtendedGcodeParser} from "./KlipperExtendedGcodeParser";
 import {GcodeParseResult} from "./GcodeParser";
-import {GcodeInfo, GcodeInfoGroup, GcodeInfoSet, Source} from "./GcodeInfo";
+import {GcodeInfo, GcodeInfoGroup, GcodeInfoSet, GcodeMeta, Source} from "./GcodeInfo";
 
 export type SearchOptions = {
   maxResultCount: number,
@@ -30,11 +30,18 @@ export type SearchResult = {
 
 export class DocumentationService {
   public readonly allGcodes: GcodeInfoSet;
+  public readonly allGcodesDate: Date | null;
   private readonly allGcodesById: { [p: string]: [string, GcodeInfo] };
   private readonly klipperGcodeParser: KlipperExtendedGcodeParser;
 
-  constructor(allGcodes: GcodeInfoSet) {
+  constructor(allGcodes: GcodeInfoSet, allGcodesDate: Date | null) {
     this.allGcodes = allGcodes;
+    this.allGcodesDate = allGcodesDate;
+    if (allGcodes["!"]) {
+      const meta = allGcodes["!"] as unknown as GcodeMeta;
+      delete allGcodes["!"];
+      this.allGcodesDate = new Date(meta.date);
+    }
     this.allGcodesById = Object.fromEntries(
       Object.entries(this.allGcodes)
       .map(([command, values]) => values.map(value => ([command, value] as [string, GcodeInfo])))
