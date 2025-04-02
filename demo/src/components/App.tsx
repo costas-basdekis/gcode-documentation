@@ -16,7 +16,7 @@ type AppState = {
 
 export class App extends Component<{}, AppState> {
   getInitialState(): AppState {
-    const documentationService = new DocumentationService(demoGcodeInfoSet);
+    const documentationService = new DocumentationService(demoGcodeInfoSet, null);
     const searchTerm = "G1 X110";
 
     return {
@@ -44,7 +44,7 @@ export class App extends Component<{}, AppState> {
   async loadAllCodes() {
     const response = await fetch(`${process.env.PUBLIC_URL}/allCodes.json`);
     const allCodes = await response.json();
-    const documentationService = new DocumentationService(allCodes);
+    const documentationService = new DocumentationService(allCodes, null);
     this.setState({
       documentationService,
       hasFullDocumentation: true,
